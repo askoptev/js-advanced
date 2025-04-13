@@ -1,0 +1,32 @@
+{
+  "name": "books-libriary",
+  "version": "1.0.0",
+  "description": "Проект JS-Advanced: Библиотека Книг",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "start": "live-server",
+    "build": "rollup -c --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/askoptev/js-advanced.git"
+  },
+  "author": "Alexander Koptev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/askoptev/js-advanced/issues"
+  },
+  "homepage": "https://github.com/askoptev/js-advanced#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.24.0",
+    "@rollup/plugin-node-resolve": "^16.0.1",
+    "eslint": "^9.24.0",
+    "globals": "^16.0.0",
+    "rollup": "^4.40.0",
+    "rollup-plugin-import-css": "^3.5.8"
+  },
+  "dependencies": {
+    "live-server": "^1.2.0"
+  }
+}
