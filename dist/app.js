@@ -1104,6 +1104,34 @@
   onChange.target = proxy => proxy?.[TARGET] ?? proxy;
   onChange.unsubscribe = proxy => proxy?.[UNSUBSCRIBE] ?? proxy;
 
+  class DivComponent {
+    constructor() {
+      this.el = document.createElement('div');
+    }
+
+    render() {
+      this.el;
+    }
+  }
+
+  class Header extends DivComponent {
+    constructor(AppState) {
+      super();
+      this.AppState = AppState;
+    }
+
+    render() {
+      this.el.innerHTML = '';
+      this.el.classList.add('header');
+      this.el.innerHTML = `
+      <div>
+        <img src="/static/logo.svg" alt="Logo">
+      </div>
+    `;
+      return this.el;
+    }
+  }
+
   class MainView extends AbstractView {
     state = {
       list: [],
@@ -1128,10 +1156,15 @@
 
     render() {
       const main = document.createElement("div");
-      main.innerHTML = `Число книг: ${this.appState.favorites.length}`;
       this.app.innerHTML = "";
       this.app.append(main);
+      this.renderHeader();
       // this.appState.favorites.push('d')
+    }
+
+    renderHeader() {
+      const header = new Header(this.appState).render();
+      this.app.prepend(header);
     }
   }
 
