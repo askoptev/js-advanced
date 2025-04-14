@@ -1,6 +1,7 @@
 import { AbstractView } from "../../common/view";
 import onChange from 'on-change';
 import { Header } from "../../components/header/header";
+import { Search } from "../../components/search/search";
 
 export class MainView extends AbstractView {
   state = {
@@ -26,6 +27,7 @@ export class MainView extends AbstractView {
 
   render() {
     const main = document.createElement("div");
+    main.append(new Search(this.state).render());
     this.app.innerHTML = "";
     this.app.append(main);
     this.renderHeader();
