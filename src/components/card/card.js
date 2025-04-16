@@ -13,12 +13,30 @@ export class Card extends DivComponent {
   }
 
   #deleteFromFavorites() {
-    this.appState.favorites = this.appState.favorites.filter(e => e.key !== this.cardState.key);    
+    this.appState.favorites = this.appState.favorites.filter((e) => e.key !== this.cardState.key);
   }
 
-  render() {  
+  #onCard(event) {
+    const button = event.target.classList.contains("button__add");
+    const img = event.target.classList.contains("button__img");
+    const existInFavorites = this.appState.favorites.find((b) => b.key == this.cardState.key);
+    if (button || img) {
+      if (existInFavorites) {
+        this.#deleteFromFavorites();
+      } else {
+        this.#addToFavorites();
+      }
+      return;
+    }
+    const queryString = new URLSearchParams({ key: this.cardState.cover_edition_key }).toString();
+    window.location.hash = "book"; // тригерит прослушку по хэш
+    const newUrl = `?${queryString}#${"book"}`;
+    window.history.pushState(null, "", newUrl); // меняет адрес без релода страницы
+  }
+
+  render() {
     this.el.classList.add("card");
-    const existInFavorites = this.appState.favorites.find(b => b.key == this.cardState.key)
+    const existInFavorites = this.appState.favorites.find((b) => b.key == this.cardState.key);
     this.el.innerHTML = `
       <div class="card__image">
         <img src="https://covers.openlibrary.org/b/olid/${this.cardState.cover_edition_key}-M.jpg" alt="Обложка">
@@ -35,16 +53,15 @@ export class Card extends DivComponent {
         </div>
         <div class="card__footer">
         <button class="button__add ${existInFavorites ? "button__active" : ""}">
-        ${existInFavorites ? '<img src="/static/favorite.svg">' : '<img src="/static/favorite-white.svg">'}
+        ${existInFavorites ? '<img class="button__img" src="/static/favorite.svg">' : '<img class="button__img" src="/static/favorite-white.svg">'}
         </button>
         </div>
       </div>
     `;
-    if (existInFavorites) {
-      this.el.querySelector('button').addEventListener("click", this.#deleteFromFavorites.bind(this));
-    } else {
-      this.el.querySelector("button").addEventListener("click", this.#addToFavorites.bind(this));
-    }
+
+    this.el.addEventListener("click", (event) => {
+      this.#onCard(event);
+    });
 
     return this.el;
   }

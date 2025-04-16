@@ -3,6 +3,7 @@ import onChange from "on-change";
 import { Header } from "../../components/header/header";
 import { Search } from "../../components/search/search";
 import { CardList } from "../../components/card-list/card-list";
+import { Pagination } from "../../components/pagination/pagination";
 
 export class MainView extends AbstractView {
   state = {
@@ -33,12 +34,18 @@ export class MainView extends AbstractView {
   }
 
   async stateHook(path) {
-    if (path == "searchQuery") {
+    console.log(path);
+
+    if (path == "searchQuery" || path === "offset") {
       this.state.loading = true;
       const data = await this.loadList(this.state.searchQuery, this.state.offset);
       this.state.loading = false;
       this.state.numFound = data.numFound;
       this.state.list = data.docs;
+      
+      // const book = await this.loadBook(this.state.list[0].cover_edition_key);
+      // console.log(book);
+      
     }
     if (path === "list") {
       this.render();
@@ -53,15 +60,20 @@ export class MainView extends AbstractView {
     return res.json();
   }
 
+  async loadBook(key) {
+    const res = await fetch(`https://openlibrary.org/books/${key}`);
+    return res.json();
+  }
+
   render() {
     const main = document.createElement("div");
     main.innerHTML = `<h1>Найдено книг - ${this.state.numFound}</h1>`;
     main.prepend(new Search(this.state).render());
     main.append(new CardList(this.appState, this.state).render());
+    main.append(new Pagination(this.state).render());
     this.app.innerHTML = "";
     this.app.append(main);
     this.renderHeader();
-    // this.appState.favorites.push('d')
   }
 
   renderHeader() {
