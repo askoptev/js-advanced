@@ -1,12 +1,16 @@
 "use strict";
 
+import { Favorites } from "./views/favorites/favorites";
 import { MainView } from "./views/main/main";
 
 class App {
-  routes = [{ path: "", view: MainView }];
+  routes = [
+    { path: "", view: MainView },
+    { path: "#favorites", view: Favorites },
+  ];
   appState = {
     favorites: [],
-  }
+  };
   constructor() {
     window.addEventListener("hashchange", this.route.bind(this));
     this.route();
