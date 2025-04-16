@@ -1,12 +1,12 @@
 "use strict";
 
-import { Favorites } from "./views/favorites/favorites";
+import { FavoritesView } from "./views/favorites/favorites";
 import { MainView } from "./views/main/main";
 
 class App {
   routes = [
     { path: "", view: MainView },
-    { path: "#favorites", view: Favorites },
+    { path: "#favorites", view: FavoritesView },
   ];
   appState = {
     favorites: [],
