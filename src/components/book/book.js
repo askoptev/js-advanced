@@ -8,6 +8,7 @@ export class Book extends DivComponent {
     category: "Action & Adventure",
     publication: "1954",
     pages: "1193",
+    key: "OL22856696M",
   };
   constructor(appState) {
     super();
@@ -17,6 +18,9 @@ export class Book extends DivComponent {
   #getBook() {}
 
   render() {
+    console.log(this.appState.favorites[0].cover_edition_key);
+    
+    const existInFavorites = this.appState.favorites.find((b) => b.key == this.state.key);
     this.el.classList.add("book");
     this.el.innerHTML = `
       <h1>${this.state.title}</h1>
@@ -27,7 +31,8 @@ export class Book extends DivComponent {
           <div class="book__data-text"><span>Category:</span><span>${this.state.category}</span></div>
           <div class="book__data-text"><span>Первая публикация:</span><span>${this.state.publication}</span></div>
           <div class="book__data-text"><span>Число страниц:</span><span>${this.state.pages}</span></div>
-        </div>
+          <button class="book__favorites-add">${existInFavorites ? "Из избранного" : "В избранное"}</button>
+          </div>
       </div>
     `;
     return this.el;
