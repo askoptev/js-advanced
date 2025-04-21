@@ -1,4 +1,110 @@
+.book {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  padding-bottom: 300px;
+}
+
+.book__card {
+  display: flex;
+  gap: 20px;
+  height: 215px;
+}
+
+.book__card img {
+  height: 100%;
+  width: auto;
+  border-radius: 8px;
+}
+
+.book__data {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.book__data-text-text {
+  font-weight: 700;
+  font-size: 14px;
+  line-height: 32px;
+  line-height: 160%;
+  color: #000000;
+  align-items: center;
+}
+
+.book__data-text-title {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 32px;
+  line-height: 160%;
+  color: #000000;
+  align-items: center;
+}
+
 .book__data-text {
   display: flex;
   gap: 10px;
+}
+
+.book h1 {
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 32px;
+  color: var(--black);
+}
+
+.book h2 {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 32px;
+  color: var(--black);
+}
+
+
+.book p {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 160%;
+  color: var(--black);
+}
+
+.book__favorites-add {
+  background: black;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  padding: 10px 35px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.book__favorites-add:hover {
+  background: gray;
+}
+
+.book ui {
+  list-style: none;
+  display: flex;
+  gap: 10px;
+}
+
+.book__chip-button {
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 20px;
+  background: none;
+  padding: 6px 8px;
+  border: 1px solid black;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+
+.book__chip-button:hover {
+  color: gray;
+  border: 1px solid gray;
 }
